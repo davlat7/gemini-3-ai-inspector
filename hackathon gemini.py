@@ -3,7 +3,7 @@ from google import genai
 from PIL import Image
 
 st.set_page_config(page_title="AI Inspector", layout="wide")
-st.title("🔍 AI Inspector: Gemini 3 Fix-It Assistant")
+st.title("🔍 AI Inspector: Gemini 2 Fix-It Assistant")
 
 # API kalitni kiritish
 api_key = st.sidebar.text_input("AIzaSyDr1ChIuhiaZsjiVab4yKUSoalP2abOd1U", type="password")
@@ -12,17 +12,17 @@ if api_key:
     client = genai.Client(api_key=api_key)
     
     # Rasm yuklash qismi
-    uploaded_file = st.file_uploader("Muammoni rasmga olib yuklang...", type=["jpg", "png", "jpeg"])
+    uploaded_file = st.file_uploader("Image fix...", type=["jpg", "png", "jpeg"])
     
     if uploaded_file is not None:
         image = Image.open(uploaded_file)
-        st.image(image, caption="Yuklangan rasm", width=400)
+        st.image(image, caption="Uploaded image", width=400)
         
-        if st.button("Muammoni aniqlash"):
-            with st.spinner("Gemini 3 tahlil qilmoqda..."):
+        if st.button("Find The Problem"):
+            with st.spinner("Gemini 3 fixing ..."):
                 try:
                     # Rasm bilan birga prompt yuboramiz
-                    prompt = "Ushbu rasmdagi muammoni aniqla va uni qanday tuzatish bo'yicha qisqa, tushunarli qo'llanma ber."
+                    prompt = "This picture problem to fix give me promt."
                     response = client.models.generate_content(
                         model="gemini-2.0-flash",
                         contents=[prompt, image]
@@ -32,4 +32,5 @@ if api_key:
                 except Exception as e:
                     st.error(f"Xatolik: {e}")
 else:
-    st.warning("Iltimos, chap menyuga API kalitni kiriting.")
+
+    st.warning("Enter your API key on the left side.")
