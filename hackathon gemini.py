@@ -30,8 +30,9 @@ if api_key:
                     st.subheader("AI Tavsiyasi:")
                     st.write(response.text)
                 except Exception as e:
-                    st.error(f"Xatolik: {e}")
+                    st.error(f"Error: {e}")
 else:
 
     st.warning("Enter your API key on the left side.")
+
 
