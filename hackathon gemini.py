@@ -6,7 +6,7 @@ st.set_page_config(page_title="AI Inspector", layout="wide")
 st.title("🔍 AI Inspector: Gemini 2 Fix-It Assistant")
 
 # API kalitni kiritish
-api_key = st.sidebar.text_input("AIzaSyDr1ChIuhiaZsjiVab4yKUSoalP2abOd1U", type="password")
+api_key = st.sidebar.text_input("AIzaSyAp2j2FJlPJNmPnQVsoqlUX41e6_k317jo", type="password")
 
 if api_key:
     client = genai.Client(api_key=api_key)
@@ -34,3 +34,4 @@ if api_key:
 else:
 
     st.warning("Enter your API key on the left side.")
+
