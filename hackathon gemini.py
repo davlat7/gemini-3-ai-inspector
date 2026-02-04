@@ -21,18 +21,14 @@ if api_key:
         if st.button("Find The Problem"):
             with st.spinner("Gemini 3 fixing ..."):
                 try:
-                    # Rasm bilan birga prompt yuboramiz
                     prompt = "This picture problem to fix give me promt."
-                    response = client.models.generate_content(
-                        model="gemini-2.0-flash",
-                        contents=[prompt, image]
-                    )
-                    st.subheader("AI Tavsiyasi:")
+                    response = client.models.generate_content(model="gemini-2.0-flash", contents=[image, prompt])
                     st.write(response.text)
                 except Exception as e:
-                    st.error(f"Error: {e}")
+                    if "429" in str(e):
+                        st.error("API limit is exceeded Please wait a minute.")
+                    else:
+                        st.error(f"Error: {e}")
 else:
 
     st.warning("Enter your API key on the left side.")
-
-
